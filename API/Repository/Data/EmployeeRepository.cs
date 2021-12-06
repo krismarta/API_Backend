@@ -117,7 +117,8 @@ namespace API.Repository.Data
         public IEnumerable GetProfile(string key)
         {
             var query = from e in context.Set<Employee>()
-                        join p in context.Set<Profilling>() on key equals p.NIK
+                        where e.NIK == key
+                        join p in context.Set<Profilling>() on e.NIK equals p.NIK
                         join ed in context.Set<Education>() on p.EducationId equals ed.Id
                         join u in context.Set<University>() on ed.UniversityId equals u.Id
                         where key == e.NIK

@@ -1,0 +1,109 @@
+﻿@{
+    ViewData["Title"] = "Belajar CSS";
+}
+
+
+<div class="row">
+    <div class="col">
+        <button class="btn btn-danger" id="butonselect">Change Color Judul</button>
+    </div>
+    <div class="col">
+        <button class="btn btn-primary" id="btnselpa">Change Font Size Paragraf</button>
+    </div>
+    <div class="col">
+        <button class="btn btn-danger" id="btnchangecolgen">Change background List Genap JQuery</button>
+    </div>
+    <div class="col">
+        <button class="btn btn-warning" id="btnalert1">Show Alert Top Javascript</button>
+    </div>
+    <div class="col">
+        <button class="btn btn-primary" id="btnchangetext3">Change Text Header 3</button>
+    </div>
+    <div class="col">
+        <button class="btn btn-warning" id="btnmousemove">Mouse Hover Alert + change color paragraf</button>
+    </div>
+</div>
+
+<div class="test_text row mt-3">
+    <div class="col">
+        <p id="paragraf1">
+            Tincidunt integer eu augue augue nunc elit dolor, luctus placerat scelerisque euismod,
+            iaculis eu lacus nunc mi elit, vehicula ut laoreet ac, aliquam sit amet justo nunc tempor, metus vel.
+        </p>
+    </div>
+    <div class="col">
+        <ul>
+            <li class="list">List 1</li>
+            <li class="list">List 2</li>
+            <li class="list">List 3</li>
+            <li class="list">List 4</li>
+            <li class="list">List 5</li>
+            <li class="list">List 6</li>
+        </ul>
+    </div>
+    
+
+    <div class="col">
+        <h1 id="xjudul">
+            Ini Jadi Judul
+        </h1>
+        <h3 id="xsub3">
+            ini Header 3
+        </h3>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <h1>List Starwars</h1>
+
+        <table class="table table-hover table-responsive">
+            <thead>
+                <tr class="font-weight-bold text-primary">
+                    <td>No</td>
+                    <td>Name</td>
+                    <td>Hair Color</td>
+                    <td>Skin Color</td>
+                    <td>Eye Color</td>
+                    <td>Gender</td>
+                </tr>
+            </thead>
+            <tbody id="listSW">
+                <tr>
+                    <td>1234</td>
+                    <td>1234</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col">
+        <h1>List Pokemon</h1>
+
+        <table class="table table-hover table-responsive">
+            <thead>
+                <tr class="font-weight-bold text-warning">
+                    <td>No</td>
+                    <td>Name</td>
+                    <td>Detail Pokemon</td>
+                </tr>
+            </thead>
+            <tbody id="listPK">
+                @*<tr>
+                    <td>1234</td>
+                    <td>1234</td>
+                </tr>*@
+            </tbody>
+        </table>   
+        
+    </div>
+
+
+
+</div>
+
+@section Scripts{
+    <script src="~/js/latihanArray.js"></script>
+    <script src="~/js/latihanAjax.js"></script>
+    <script src="~/js/site.js"></script>
+}

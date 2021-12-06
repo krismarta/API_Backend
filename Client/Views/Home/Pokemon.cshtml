@@ -1,0 +1,111 @@
+﻿@{
+    ViewData["Title"] = "Pokemon API";
+}
+
+<div class="row justify-content-center">
+    <div class="col-6 text-center mt-2">
+        <h1 class="mb-3">List Pokemon</h1>
+        <table class="table table-hover table-striped table-bordered " id="example">
+            <thead class="thead-light font-weight-bold text-primary">
+                <tr class="">
+                    <td>No</td>
+                    <td>Name</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody id="listPK">
+            </tbody>
+        </table>
+    </div>
+
+   
+    <!-- Modal -->
+    <div class="modal fade" id="detailpoke" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail Pokemon</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body ">
+                    <div class="container">
+                        <div class="row ">
+                            <div class="col-6 mx-auto text-center" id="imagepoke">
+                            </div>
+                        </div>
+                        <div class="row mt-2">
+                            <div id="typepoke" class="col text-center">
+                                
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="text-info font-weight-bold">Informasi Pokemon</h6>
+                                <table id="infopoke" class="table table-hover table-bordered">
+                                    
+                                </table>
+                            </div>
+
+                            <div class="col">
+                                <h6 class="text-info font-weight-bold">Skill Pokemon</h6>
+                                <table id="skillpoke" class="table table-hover table-bordered">
+                                    <tr>
+                                        <td>etst</td>
+                                    </tr>
+                                    <tr>
+                                        <td>test</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                            
+
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="text-info font-weight-bold">Status Pokemon</h6>
+                                <table class="table table-hover table-bordered">
+                                    <thead>
+                                        <tr class="font-weight-bold">
+                                            <td>Name Status</td>
+                                            <td>Effort</td>
+                                            <td>Amount</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="statspoke">
+                                        <tr>
+                                            <td>HP</td>
+                                            <td>180</td>
+                                            <td>180</td>
+                                        </tr>
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+
+                     
+                    </div>
+                    
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts{
+    <script src="~/js/pokemon.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+   
+}
