@@ -1,4 +1,4 @@
-using API.Context;
+    using API.Context;
 using API.Repository;
 using API.Repository.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -72,11 +72,33 @@ namespace API
                     ValidateLifetime = true,
                     ClockSkew = TimeSpan.Zero,
                 };
+                options.Events = new JwtBearerEvents
+                {
+                    OnChallenge = async context =>
+                    {
+                        // Call this to skip the default logic and avoid using the default response
+                        context.HandleResponse();
+
+                        // Write to the response in any way you wish
+                        context.Response.StatusCode = 401;
+                        context.Response.ContentType = "application/json";
+                        
+                        await context.Response.WriteAsync(JsonConvert.SerializeObject(new
+                        {
+                            status = HttpStatusCode.Unauthorized,
+                            messageResult = "Kamu Belum terotorisasi oleh sistem"
+                        }));
+                    }
+                };
             });
 
             services.AddCors(c =>
             {
-                c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin());
+                c.AddPolicy("AllowOrigin", options =>
+                    options.AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                ) ;
             });
 
         }
@@ -89,28 +111,29 @@ namespace API
                 app.UseDeveloperExceptionPage();
             }
 
-            
+            app.UseCors("AllowOrigin");
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            app.Use(async (context, next) =>
-            {
-                await next();
+            //app.Use(async (context, next) =>
+            //{
+            //    await next();
 
-                if (context.Response.StatusCode == (int)HttpStatusCode.Unauthorized)
-                {
-                    await context.Response.WriteAsync("Kamu belum terOtorisasi oleh sistem");
-                }else if(context.Response.StatusCode == (int)HttpStatusCode.Forbidden)
-                {
-                    await context.Response.WriteAsync("Role kamu Employee tidak dapat menggunakan fitur ini");
-                }
-            });
+            //    if (context.Response.StatusCode == (int)HttpStatusCode.Unauthorized)
+            //    {
+            //        await context.Response.WriteAsync("Kamu belum terOtorisasi oleh sistem");
+            //    }else if(context.Response.StatusCode == (int)HttpStatusCode.Forbidden)
+            //    {
+            //        await context.Response.WriteAsync("Role kamu Employee tidak dapat menggunakan fitur ini");
+            //    }
+            //});
+            
             app.UseAuthentication();
             app.UseAuthorization();
 
            
-            app.UseCors(options => options.AllowAnyOrigin());
+           
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

@@ -1,0 +1,210 @@
+﻿
+@{
+    ViewData["Title"] = "Employee API";
+}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Employee</h1>
+    <div class="btncreate float-none text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" onclick="showCreateEmployee()">
+            <span class="fas fa-user-plus">&nbsp;</span>
+            Create New Employee
+        </button>
+
+    </div>
+</div>
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">List Employee</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive tablediv">
+            <table id="listemployee" class="table table-hover table-bordered" width="100%" cellspacing="0">
+                <thead class="thead-light font-weight-bold text-primary">
+                    <tr class="">
+                        <td>No</td>
+                        <td>NIK</td>
+                        <td>Full Name</td>
+                        <td>Phone</td>
+                        <td>Birth Date</td>
+                        <td>Salary</td>
+                        <td>Email</td>
+                        <td>Gender</td>
+                        <td>Action</td>
+                    </tr>
+                </thead>
+                <tbody id="listemployee">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Modal Insert And Update-->
+<div class="modal fade createEmployee" id="createEmployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="labelText">Create New Employee</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="fEmployee" class="needs-validation" novalidate>
+                <div class="modal-body">
+
+                    <div class="form-row">
+
+                        <div class="col">
+                            <div class="form-group has-feedback">
+                                <label for="inputNik">NIK</label>
+                                <input type="number" class="form-control textbox" id="inputNik" placeholder="Enter NIK" required />
+                                <div class="valid-feedback">
+                                    Oke Mantap Bener
+                                </div>
+                                <div class="invalid-feedback">
+                                    Nik Masih kosong / tidak sesuai dengan format
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputFirst">First Name</label>
+                                <input type="text" class="form-control textbox" id="inputFirst" placeholder="Enter FirstName" required />
+                                <div class="valid-feedback">
+                                    Oke Mantap Bener
+                                </div>
+                                <div class="invalid-feedback">
+                                    Firstname Masih kosong / tidak sesuai dengan format
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputLastname">Last Name</label>
+                                <input type="text" class="form-control textbox" id="inputLastname" placeholder="Enter LastName" required />
+                                <div class="valid-feedback">
+                                    Oke Mantap Bener
+                                </div>
+                                <div class="invalid-feedback">
+                                    Lastname Masih kosong / tidak sesuai dengan format
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail">Email</label>
+                                <input type="email" class="form-control textbox" id="inputEmail" placeholder="Enter Email" required />
+                                <div class="valid-feedback">
+                                    Oke Mantap Bener
+                                </div>
+                                <div class="invalid-feedback">
+                                    Email Masih kosong / tidak sesuai dengan format
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col">
+
+                            <div class="form-group">
+                                <label for="inputPhone">Phone</label>
+                                <input type="number" class="form-control textbox" id="inputPhone" placeholder="Enter Phone" required />
+                                <div class="valid-feedback">
+                                    Oke Mantap Bener
+                                </div>
+                                <div class="invalid-feedback">
+                                    Phone Masih kosong / tidak sesuai dengan format
+                                </div>
+                            </div>
+                            @*<div class="form-group">
+                                    <label for="inputGender">Gender</label>
+                                    <select id="inputGender" class="form-control" required>
+                                        <option value="99" selected>Select Gender</option>
+                                        <option value="0">Male</option>
+                                        <option value="1">Female</option>
+                                    </select>
+                                    <div class="valid-feedback">
+                                        Oke Mantap Bener
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Gender Masih kosong / tidak sesuai dengan format
+                                    </div>
+                                </div>*@
+
+                            <div class="form-group">
+                                <label for="genderRadio11">Gender</label><br />
+                                <div class="form-check-inline">
+                                    <input class="form-check-input inputGenders" type="radio" name="inputGenders" id="genderRadio1" value="0">
+                                    <label class="form-check-label" for="genderRadio1">
+                                        Male
+                                    </label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <input class="form-check-input inputGenders" type="radio" name="inputGenders" id="genderRadio2" value="1">
+                                    <label class="form-check-label" for="genderRadio2">
+                                        Female
+                                    </label>
+                                </div>
+                                <div class="valid-feedback">
+                                    Oke Mantap Bener
+                                </div>
+                                <div class="invalid-feedback">
+                                    Gender Masih kosong / tidak sesuai dengan format
+                                </div>
+
+                            </div>
+                            <div>
+                                <div class="form-group">
+                                    <label for="inputBirth">Birth Date</label>
+                                    <input type="text" class="form-control textbox" id="inputBirth" readonly placeholder="Enter Birthdate" required />
+                                    <div class="valid-feedback">
+                                        Oke Mantap Bener
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        Birth Date Masih kosong / tidak sesuai dengan format
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputSalary">Salary</label>
+                                <input type="number" class="form-control textbox" id="inputSalary" placeholder="Enter Salary" required />
+                                <div class="valid-feedback">
+                                    Oke Mantap Bener
+                                </div>
+                                <div class="invalid-feedback">
+                                    Salary Masih kosong / tidak sesuai dengan format
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="btnSaveEmployee" class="btn btn-info"><span class="fas fa-save">&nbsp;</span>Save New Employee</button>
+                    @*<button type="button" class="btn btn-info" onclick="getgender()"><span class="fas fa-save">&nbsp;</span>Testgetgender</button>*@
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/employee.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.1.0/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.1.0/js/buttons.print.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <!-- Bootstrap Date-Picker Plugin -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+
+}
+
+
+
+
+
+
+

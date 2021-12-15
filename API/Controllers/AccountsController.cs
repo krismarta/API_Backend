@@ -49,24 +49,37 @@ namespace API.Controllers
             else if (result == 1)
             {
 
-                var results = accountrepository.GetProfile(loginvm);
+                //var results = accountrepository.GetProfile(loginvm);
                 
 
                 var getRole = from e in context.Set<Employee>()
-                              where e.Email == loginvm.Email
-                              join a in context.Set<Account>() on e.NIK equals a.NIK
-                              join ar in context.Set<AccountRole>() on a.NIK equals ar.AccountNIK
+                              where e.Email == loginvm.Email || e.Phone == loginvm.Phone
+                              join a in context.Set<Account>() on e.Nik equals a.Nik
+                              join ar in context.Set<AccountRole>() on a.Nik equals ar.AccountNIK
                               join r in context.Set<Role>() on ar.RoleId equals r.RoleId
                               select new
                               {
                                   r.Name
                               };
-
-                var claims = new List<Claim>
+                var claims = new List<Claim> { };
+                if (loginvm.Phone == null || loginvm.Phone == "")
                 {
-                    new Claim(ClaimTypes.Email,loginvm.Email)
-                    
-                };
+
+                    //var claimss = new List<Claim>
+                    // {
+                    //    new Claim(ClaimTypes.Email,loginvm.Email)
+                    //};
+                    claims.Add(new Claim(ClaimTypes.Email, loginvm.Email));
+                }
+                else
+                {
+                    //var claimss = new List<Claim>
+                    // {
+                    //new Claim(ClaimTypes.MobilePhone,loginvm.Phone)
+
+                    //};
+                    claims.Add(new Claim(ClaimTypes.MobilePhone, loginvm.Phone));
+                }
                 foreach (var userRole in getRole)
                 {
                     claims.Add(new Claim(ClaimTypes.Role, userRole.Name));
@@ -79,14 +92,16 @@ namespace API.Controllers
                     _configuration["Jwt:Issuer"],
                     _configuration["Jwt:Audience"],
                     claims,
-                    expires: DateTime.UtcNow.AddMinutes(10),
+                    expires: DateTime.UtcNow.AddMinutes(100),
                     signingCredentials: signin
                     );
                 var idtoken = new JwtSecurityTokenHandler().WriteToken(token);
                 claims.Add(new Claim("TokenSecurity", idtoken.ToString()));
 
-                return Ok(new {status = HttpStatusCode.OK,result = results,idtoken , message = "Berhasil login"});
+                //return Ok(new {status = HttpStatusCode.OK,result = results,idtoken , message = "Berhasil login"});
+                return Ok(new { idtoken = idtoken,Email = loginvm.Email, Phone = loginvm.Phone});
             }
+
             return NotFound(new { status = HttpStatusCode.NotFound, result = result, message = $"Data tidak ditemukan" });
         }
 

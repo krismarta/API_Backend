@@ -15,7 +15,7 @@ namespace API.Models
     {
         [JsonIgnore]
         [Key]
-        public string NIK { get; set; }
+        public string Nik { get; set; }
         [JsonIgnore]
         [Required]
         [DataType(DataType.Password)]

@@ -26,9 +26,23 @@ namespace API.Controllers
         [HttpGet("getcount")]
         public ActionResult getCount()
         {
-            var result = UniversityRepository.GetAllCount();
+            var results = UniversityRepository.GetAllCount();
+            var univ = new List<string>();
+            var value = new List<int>(); ;
+           
+            foreach (var item in results)
+            {
+                univ.Add(Convert.ToString(item.GetType().GetProperty("data").GetValue(item, null)));
 
-            return Ok(new { status = HttpStatusCode.OK, result, messageResult = "Total pegawai dalam kategori university" });
+                value.Add(Convert.ToInt32(item.GetType().GetProperty("total").GetValue(item, null)));
+
+            }
+
+
+
+            //var data = new { data = value };
+            var result = new { label = univ, series = value };
+            return Ok(new { status = HttpStatusCode.OK,result, messageResult = "Total pegawai dalam kategori university" });
         }
     }
 }

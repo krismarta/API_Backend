@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace API.ViewModel
 {
@@ -14,6 +12,7 @@ namespace API.ViewModel
         public DateTime BirthDate { get; set; }
         public int Salary { get; set; }
         public string Email { get; set; }
+        [JsonIgnore]
         public string Password { get; set; }
         public string degree { get; set; }
         public string GPA { get; set; }

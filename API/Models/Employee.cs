@@ -13,7 +13,7 @@ namespace API.Models
     public class Employee
     {
         [Key]
-        public string NIK { get; set; }
+        public string Nik { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Phone { get; set; }

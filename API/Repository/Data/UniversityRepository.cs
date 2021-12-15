@@ -19,20 +19,20 @@ namespace API.Repository.Data
         {
             context = myContext;
         }
-        public IEnumerable GetAllCount()
+        public List<object> GetAllCount()
         {
             var query = from e in context.Set<Employee>()
-                        join p in context.Set<Profilling>() on e.NIK equals p.NIK
+                        join p in context.Set<Profilling>() on e.Nik equals p.Nik
                         join ed in context.Set<Education>() on p.EducationId equals ed.Id
                         join u in context.Set<University>() on ed.UniversityId equals u.Id
                         group u by new { u.Id, u.Name } into g
 
                         select new
                         {
-                            g.Key.Name,
+                            data = g.Key.Name,
                             total = g.Count()
                         };
-            return query.ToArray();
+            return query.ToList<object>();
         }
     }
 }

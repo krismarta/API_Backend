@@ -1,4 +1,5 @@
 ﻿using API.Repository.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
@@ -25,11 +26,12 @@ namespace API.Base
             var result = repository.Insert(entity);
             if (result >= 1)
             {
-                return Ok(new { status = HttpStatusCode.OK, result, messageResult = "Data berhasil ditambahkan" });
+                //return Ok(new { status = HttpStatusCode.OK, result, messageResult = "Data berhasil ditambahkan" });
+                return Ok(result);
             }
-            return Conflict(new { status = HttpStatusCode.Conflict, result, messageResult = "Sepertinya terjadi kesalahan, periksa kembali!" });
+            return BadRequest(new { status = HttpStatusCode.BadRequest, result, messageResult = "Sepertinya terjadi kesalahan, periksa kembali!" });
         }
-
+        
         [HttpGet]
         public ActionResult Get()
         {
@@ -38,7 +40,8 @@ namespace API.Base
             {
                 return NotFound(new { status = HttpStatusCode.NotFound, result, messageResult = "Sepertinya data masih kosong" });
             }
-            return Ok(new { status = HttpStatusCode.OK, result, messageResult = "Semua data berhasil ditampilkan" });
+            //return Ok(new { status = HttpStatusCode.OK, result, messageResult = "Semua data berhasil ditampilkan" });
+            return Ok(result);
         }
 
         [HttpDelete("{Key}")]
@@ -47,7 +50,8 @@ namespace API.Base
             var result = repository.Delete(key);
             if (result >= 1)
             {
-                return Ok(new { status = HttpStatusCode.OK, result, messageResult = $"Data {key} berhasil dihapus" });
+                //return Ok(new { status = HttpStatusCode.OK, result, messageResult = $"Data {key} berhasil dihapus" });
+                return Ok(result);
             }
             return NotFound(new { status = HttpStatusCode.NotFound, result, messageResult = $"Data {key} tidak ditemukan." });
         }
@@ -58,18 +62,20 @@ namespace API.Base
             var result = repository.Get(key);
             if (result != null)
             {
-                return Ok(new { status = HttpStatusCode.OK, result, messageResult = "Data ditemukan" });
+                //return Ok(new { status = HttpStatusCode.OK, result, messageResult = "Data ditemukan" });
+                return Ok(result);
             }
             return NotFound(new { status = HttpStatusCode.NotFound, result, messageResult = $"Data {key} tidak ditemukan." });
         }
 
-        [HttpPut]
+        [HttpPut("{Key}")]
         public ActionResult Put(Entity entity,Key key)
         {
             var result = repository.Update(entity,key);
             if (result >= 1)
             {
-                return Ok(new { status = HttpStatusCode.OK, result, messageResult = "Perubahan data Berhasil dilakukan" });
+                //return Ok(new { status = HttpStatusCode.OK, result, messageResult = "Perubahan data Berhasil dilakukan" });
+                return Ok(result);
             }
             return BadRequest(new { status = HttpStatusCode.BadRequest, result, messageResult = "terjadi kesalahan pada Perubahan data." });
         }

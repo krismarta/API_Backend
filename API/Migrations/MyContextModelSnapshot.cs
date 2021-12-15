@@ -21,14 +21,14 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.Account", b =>
                 {
-                    b.Property<string>("NIK")
+                    b.Property<string>("Nik")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("NIK");
+                    b.HasKey("Nik");
 
                     b.ToTable("tb_m_account");
                 });
@@ -80,7 +80,7 @@ namespace API.Migrations
 
             modelBuilder.Entity("API.Models.Employee", b =>
                 {
-                    b.Property<string>("NIK")
+                    b.Property<string>("Nik")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("BirthDate")
@@ -104,20 +104,20 @@ namespace API.Migrations
                     b.Property<int>("Salary")
                         .HasColumnType("int");
 
-                    b.HasKey("NIK");
+                    b.HasKey("Nik");
 
                     b.ToTable("tb_m_employee");
                 });
 
             modelBuilder.Entity("API.Models.Profilling", b =>
                 {
-                    b.Property<string>("NIK")
+                    b.Property<string>("Nik")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("EducationId")
                         .HasColumnType("int");
 
-                    b.HasKey("NIK");
+                    b.HasKey("Nik");
 
                     b.HasIndex("EducationId");
 
@@ -158,7 +158,7 @@ namespace API.Migrations
                 {
                     b.HasOne("API.Models.Employee", "employee")
                         .WithOne("account")
-                        .HasForeignKey("API.Models.Account", "NIK")
+                        .HasForeignKey("API.Models.Account", "Nik")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -203,7 +203,7 @@ namespace API.Migrations
 
                     b.HasOne("API.Models.Account", "account")
                         .WithOne("profilling")
-                        .HasForeignKey("API.Models.Profilling", "NIK")
+                        .HasForeignKey("API.Models.Profilling", "Nik")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

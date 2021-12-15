@@ -23,7 +23,7 @@ namespace API.Repository.Data
         {
             Employee e = new Employee()
             {
-                NIK = registerVM.NIK,
+                Nik = registerVM.NIK,
                 FirstName = registerVM.FirstName,
                 LastName = registerVM.Lastname,
                 Phone = registerVM.Phone,
@@ -31,7 +31,7 @@ namespace API.Repository.Data
                 Email = registerVM.Email,
                 Salary = registerVM.Salary
             };
-            var checkNik = context.Employees.Find(e.NIK);
+            var checkNik = context.Employees.Find(e.Nik);
             var checkEmail = context.Employees.Where(b => b.Email == registerVM.Email).FirstOrDefault();
             var checkPhone = context.Employees.Where(b => b.Phone == registerVM.Phone).FirstOrDefault();
             if (checkNik != null)
@@ -50,7 +50,7 @@ namespace API.Repository.Data
 
             Account a = new Account()
             {
-                NIK = registerVM.NIK,
+                Nik = registerVM.NIK,
                 
                 Password = Hashing.Hashing.EncrpytPassword(registerVM.Password)
             };
@@ -75,7 +75,7 @@ namespace API.Repository.Data
 
             Profilling p = new Profilling()
             {
-                NIK = registerVM.NIK,
+                Nik = registerVM.NIK,
                 EducationId = ed.Id
             };
 
@@ -91,15 +91,18 @@ namespace API.Repository.Data
             }
         }
 
-        public IEnumerable EmployeeAllData()
+        public IEnumerable GetRegister()
         {
 
             var query = from e in context.Set<Employee>()
-                        join p in context.Set<Profilling>() on e.NIK equals p.NIK
+                        join p in context.Set<Profilling>() on e.Nik equals p.Nik
                         join ed in context.Set<Education>() on p.EducationId equals ed.Id
                         join u in context.Set<University>() on ed.UniversityId equals u.Id
 
                         select new {
+                            nik = e.Nik,
+                            e.FirstName,
+                            e.LastName,
                             FullName = e.FirstName + " " + e.LastName,
                             gender = e.Gender == 0 ? "Male" : "Female",
                             e.Phone,
@@ -108,7 +111,7 @@ namespace API.Repository.Data
                             e.Email,
                             ed.Degree,
                             ed.GPA,
-                            u.Name
+                            universityId = u.Id
                         };
 
             return query.ToList();
@@ -117,11 +120,11 @@ namespace API.Repository.Data
         public IEnumerable GetProfile(string key)
         {
             var query = from e in context.Set<Employee>()
-                        where e.NIK == key
-                        join p in context.Set<Profilling>() on e.NIK equals p.NIK
+                        where e.Nik == key
+                        join p in context.Set<Profilling>() on e.Nik equals p.Nik
                         join ed in context.Set<Education>() on p.EducationId equals ed.Id
                         join u in context.Set<University>() on ed.UniversityId equals u.Id
-                        where key == e.NIK
+                        where key == e.Nik
                         select new
                         {
                             FullName = e.FirstName + " " + e.LastName,
@@ -155,6 +158,18 @@ namespace API.Repository.Data
             }
             return 2;
         }
-       
+
+        public int getCountMale()
+        {
+            var query1 = context.Employees.Count(a => a.Gender == 0 );
+            return query1;
+        }
+
+        public int getCountFemale()
+        {
+            var query2 = context.Employees.Where(c => c.Gender > 0).Count();
+            return query2;
+        }
+
     }
 }

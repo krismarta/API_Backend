@@ -25,12 +25,12 @@ namespace API.Repository.Data
             {
                 var password = (from e in context.Set<Employee>()
                                 where e.Email == loginVM.Email || e.Phone == loginVM.Phone
-                                join a in context.Set<Account>() on e.NIK equals a.NIK
+                                join a in context.Set<Account>() on e.Nik equals a.Nik
                                 select a.Password).Single();
                 var nik = (from e in context.Set<Employee>()
                                 where e.Email == loginVM.Email || e.Phone == loginVM.Phone
-                                join a in context.Set<Account>() on e.NIK equals a.NIK
-                                select e.NIK).Single();
+                                join a in context.Set<Account>() on e.Nik equals a.Nik
+                           select e.Nik).Single();
                 var checkPassword = Hashing.Hashing.ValidatePassword(loginVM.Password, password);
 
                 if (checkPassword == false)
@@ -57,8 +57,8 @@ namespace API.Repository.Data
                 string passwordnew = Guid.NewGuid().ToString().Substring(0, 12);
                 var nik = (from e in context.Set<Employee>()
                            where e.Email == forgotVM.Email
-                           join a in context.Set<Account>() on e.NIK equals a.NIK
-                           select e.NIK).Single();
+                           join a in context.Set<Account>() on e.Nik equals a.Nik
+                           select e.Nik).Single();
 
                 var original = context.Accounts.Find(nik);
                 var dataEmployee = context.Employees.Find(nik);
@@ -106,11 +106,11 @@ namespace API.Repository.Data
                 {
                     var nik = (from e in context.Set<Employee>()
                                where e.Email == changePasVM.Email
-                               join a in context.Set<Account>() on e.NIK equals a.NIK
-                               select e.NIK).Single();
+                               join a in context.Set<Account>() on e.Nik equals a.Nik
+                               select e.Nik).Single();
                     var password = (from e in context.Set<Employee>()
                                     where e.Email == changePasVM.Email
-                                    join a in context.Set<Account>() on e.NIK equals a.NIK
+                                    join a in context.Set<Account>() on e.Nik equals a.Nik
                                     select a.Password).Single();
                     var checkPassword = Hashing.Hashing.ValidatePassword(changePasVM.OldPassword,
                         password);
@@ -139,14 +139,14 @@ namespace API.Repository.Data
         {
             var nik = (from e in context.Set<Employee>()
                        where e.Email == loginVM.Email
-                       join a in context.Set<Account>() on e.NIK equals a.NIK
-                       select e.NIK).Single();
+                       join a in context.Set<Account>() on e.Nik equals a.Nik
+                       select e.Nik).Single();
 
             var query = from e in context.Set<Employee>()
-                        join p in context.Set<Profilling>() on nik equals p.NIK
+                        join p in context.Set<Profilling>() on nik equals p.Nik
                         join ed in context.Set<Education>() on p.EducationId equals ed.Id
                         join u in context.Set<University>() on ed.UniversityId equals u.Id
-                        where nik == e.NIK
+                        where nik == e.Nik
 
                         select new
                         {

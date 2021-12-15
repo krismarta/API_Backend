@@ -23,13 +23,13 @@ namespace API.Context
             modelBuilder.Entity<Employee>()
                 .HasOne(a => a.account)
                 .WithOne(b => b.employee)
-                .HasForeignKey<Account>(b => b.NIK);
+                .HasForeignKey<Account>(b => b.Nik);
 
             //one to one Account to Profiling
             modelBuilder.Entity<Account>()
                 .HasOne(a => a.profilling)
                 .WithOne(b => b.account)
-                .HasForeignKey<Profilling>(b => b.NIK);
+                .HasForeignKey<Profilling>(b => b.Nik);
 
             //many to one Profilling to Education
             modelBuilder.Entity<Profilling>()
