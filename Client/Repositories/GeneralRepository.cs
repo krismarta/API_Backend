@@ -1,7 +1,4 @@
-﻿
-
-
-using Client.Base.Urls;
+﻿using Client.Base.Urls;
 using Client.Repositories.Interface;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
