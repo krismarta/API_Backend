@@ -8,6 +8,6 @@ namespace Client.Base.Urls
     public class Address
     {
         // Sesuaikan dengan link Localhost API kalian
-        public string Link = "https://localhost:44325/api/";
+        public string Link = "https://localhost:44399/api/";
     }
 }

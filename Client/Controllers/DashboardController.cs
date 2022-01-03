@@ -9,6 +9,7 @@ namespace Client.Controllers
     {
         public IActionResult Index()
         {
+            
             var roleActive = "Not Found";
             if (User.IsInRole("Manager"))
             {

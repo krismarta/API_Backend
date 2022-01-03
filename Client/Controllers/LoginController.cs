@@ -58,7 +58,7 @@ namespace Client.Controllers
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
-            return RedirectToAction("index", "login");
+            return RedirectToAction("index", "Main");
         }
 
         [HttpGet("Unauthorized/")]

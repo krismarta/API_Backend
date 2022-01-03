@@ -31,12 +31,13 @@ namespace Client
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
-            services.AddSession();
-            services.AddHttpContextAccessor();
+            
             services.AddScoped<EmployeeRepository>();
             services.AddScoped<AccountRepository>();
             services.AddScoped<Address>();
+            services.AddControllersWithViews();
+            services.AddSession();
+            services.AddHttpContextAccessor();
 
             services.AddAuthentication(auth =>
             {
