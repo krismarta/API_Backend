@@ -33,6 +33,8 @@
 #*.wixproj   merge=binary
 #*.modelproj merge=binary
 #*.sqlproj   merge=binary
+* linguist-vendored
+*.cs linguist-vendored=false
 #*.wwaproj   merge=binary
 
 ###############################################################################
